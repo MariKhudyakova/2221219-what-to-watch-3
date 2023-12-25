@@ -1,5 +1,5 @@
-import { getFormattedTime } from '../../utils.ts';
-import { FilmCardType } from '../../types.ts';
+import { getRunTime } from '../../utils/get-time.ts';
+import { FilmCardType } from '../../types/film-types.ts';
 
 type DetailsProps = {
   filmCard: FilmCardType;
@@ -29,7 +29,7 @@ export default function Details({ filmCard }: DetailsProps) {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
           <span className="film-card__details-value">
-            {getFormattedTime(filmCard.runTime)}
+            {getRunTime(filmCard.runTime)}
           </span>
         </p>
         <p className="film-card__details-item">

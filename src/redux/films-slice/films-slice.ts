@@ -1,5 +1,9 @@
-import { ALL_GENRES, MAX_GENRES_COUNT } from '../../const.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Genre } from '../../types/index.ts';
+import { CommentType } from '../../types/comment-type.ts';
+import { FilmCardType, FilmType, FavouriteFilmType } from '../../types/film-types.ts';
+import { PromoFilmType } from '../../types/promo-film-type.ts';
+import { ALL_GENRES, MAX_GENRES_COUNT } from '../../const.ts';
 import {
   fetchFilmDataAction,
   fetchFilmsAction,
@@ -7,17 +11,9 @@ import {
   fetchPromoFilmAction,
   sendComment,
   setFilmStatus,
-} from '../api-actions.ts';
-import {
-  CommentType,
-  FavouriteFilmType,
-  FilmCardType,
-  FilmType,
-  Genre,
-  PromoFilmType,
-} from '../../types.ts';
+} from '../api-actions';
 
-type filmsSliceProps = {
+type FilmsSliceProps = {
   films: FilmType[];
   promoFilm: PromoFilmType | null;
   filmCard: FilmCardType | null;
@@ -30,7 +26,7 @@ type filmsSliceProps = {
   isDataLoading: boolean;
 };
 
-const initialState: filmsSliceProps = {
+const initialState: FilmsSliceProps = {
   hasError: false,
   isDataLoading: false,
   films: [],
@@ -43,18 +39,18 @@ const initialState: filmsSliceProps = {
   activeGenre: ALL_GENRES,
 };
 
-const pending = (state: filmsSliceProps) => {
+const pending = (state: FilmsSliceProps) => {
   state.isDataLoading = true;
   state.hasError = false;
 };
 
-const rejected = (state: filmsSliceProps) => {
+const rejected = (state: FilmsSliceProps) => {
   state.isDataLoading = false;
   state.hasError = true;
 };
 
 export const filmsSlice = createSlice({
-  name: 'Films',
+  name: 'films',
   initialState,
   reducers: {
     setActiveGenre: (state, action: PayloadAction<Genre>) => {

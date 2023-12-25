@@ -1,28 +1,25 @@
-import Rating from '../rating/Rating.tsx';
+import { useNavigate } from 'react-router-dom';
 import { ChangeEventHandler, useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks.ts';
+import Rating from '../rating/Rating.tsx';
+import { useAppDispatch } from '../../hooks/app-hooks.ts';
 import { sendComment } from '../../redux/api-actions.ts';
 import { CommentLength } from '../../const.ts';
-import { useNavigate } from 'react-router-dom';
 
 export type ReviewFormProps = {
   id: string;
 };
 
-export default function ReviewForm({ id }: ReviewFormProps) {
+const ReviewForm = ({ id }: ReviewFormProps) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const validate = () =>
-    rating !== 0 &&
-    comment.length >= CommentLength.MIN &&
-    comment.length <= CommentLength.MAX;
-
   const handleRatingChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     setRating(parseInt(evt.target.value, 10));
   };
+
+  const validate = () => rating !== 0 && comment.length <= CommentLength.MAX && comment.length >= CommentLength.MIN;
 
   const handleCommentChange: ChangeEventHandler<HTMLTextAreaElement> = (
     evt,
@@ -49,12 +46,7 @@ export default function ReviewForm({ id }: ReviewFormProps) {
             placeholder="Review text"
           />
           <div className="add-review__submit">
-            <button
-              className="add-review__btn"
-              type="button"
-              onClick={handleSubmit}
-              disabled={!validate()}
-            >
+            <button className="add-review__btn" type="button" onClick={handleSubmit} disabled={!validate()}>
               Post
             </button>
           </div>
@@ -62,4 +54,6 @@ export default function ReviewForm({ id }: ReviewFormProps) {
       </form>
     </div>
   );
-}
+};
+
+export default ReviewForm;

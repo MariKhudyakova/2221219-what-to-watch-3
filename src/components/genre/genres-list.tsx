@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../redux/hooks.ts';
+import { useAppSelector } from '../../hooks/app-hooks.ts';
 import GenreItem from './genre-item.tsx';
 import { getGenres } from '../../redux/films-slice/selectors.ts';
 

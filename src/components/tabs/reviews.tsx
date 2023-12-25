@@ -1,5 +1,5 @@
 import UserReview from './review.tsx';
-import { useAppSelector } from '../../redux/hooks.ts';
+import { useAppSelector } from '../../hooks/app-hooks.ts';
 import { getComments } from '../../redux/films-slice/selectors.ts';
 
 export default function Reviews() {

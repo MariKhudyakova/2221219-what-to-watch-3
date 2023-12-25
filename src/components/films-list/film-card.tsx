@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import ReviewPlayer from '../preview-player/preview-player.tsx';
-import { FilmType } from '../../types.ts';
+import { FilmType } from '../../types/film-types.ts';
 
 type MovieCardProps = {
   film: FilmType;

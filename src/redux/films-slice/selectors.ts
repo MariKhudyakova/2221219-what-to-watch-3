@@ -1,11 +1,7 @@
-import { State } from '../types.ts';
-import {
-  CommentType,
-  FilmCardType,
-  FilmType,
-  Genre,
-  PromoFilmType,
-} from '../../types.ts';
+import { Genre, State } from '../../types/index.ts';
+import { PromoFilmType } from '../../types/promo-film-type.ts';
+import { CommentType } from '../../types/comment-type.ts';
+import { FilmCardType, FilmType } from '../../types/film-types.ts';
 
 export const getFilms = (state: State): FilmType[] => state.Films.films;
 export const getPromoFilm = (state: State): PromoFilmType | null => state.Films.promoFilm;

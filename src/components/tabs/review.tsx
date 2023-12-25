@@ -1,5 +1,6 @@
-import { getFormattedDate, getFormattedRating } from '../../utils.ts';
-import { CommentType } from '../../types.ts';
+import { getFormattedRating } from '../../utils/get-films.ts';
+import { getFormattedDate } from '../../utils/get-time.ts';
+import { CommentType } from '../../types/comment-type.ts';
 
 type ReviewProps = {
   comment: CommentType;

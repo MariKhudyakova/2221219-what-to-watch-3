@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { FilmType } from '../../types.ts';
+import { FilmType } from '../../types/film-types.ts';
 
 type VideoPlayerProps = {
   film: FilmType;
@@ -42,14 +42,6 @@ export default function ReviewPlayer({ film, activeFilm }: VideoPlayerProps) {
   }, [activeFilm, film.id, film.previewVideoLink, isLoaded]);
 
   return (
-    <video
-      style={{ borderRadius: '5px' }}
-      width="280"
-      height="175"
-      poster={film.previewImage}
-      ref={playerRef}
-      src={film.previewVideoLink}
-      muted
-    />
+    <video style={{ borderRadius: '5px' }} width="280" height="175" poster={film.previewImage} ref={playerRef} src={film.previewVideoLink} muted loop />
   );
 }

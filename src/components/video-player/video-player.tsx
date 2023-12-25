@@ -1,55 +1,51 @@
 import { useEffect, useRef, useState } from 'react';
-import { FilmType } from '../../types.ts';
+import { FilmType } from '../../types/film-types.ts';
 
 type VideoPlayerProps = {
   film: FilmType;
-  activeFilm: string | null;
 };
 
-export default function VideoPlayer({ film, activeFilm }: VideoPlayerProps) {
-  const playerRef = useRef<HTMLVideoElement | null>(null);
+export default function VideoPlayer({film}: VideoPlayerProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleDataLoaded = () => {
     setIsLoaded(true);
   };
 
   useEffect(() => {
-    const playerElement = playerRef.current;
+    const playerElement = videoRef.current;
+
     if (!playerElement) {
       return;
     }
 
     playerElement.addEventListener('loadeddata', handleDataLoaded);
-    return () =>
+
+    return () => {
       playerElement.removeEventListener('loadeddata', handleDataLoaded);
+    };
   }, []);
 
   useEffect(() => {
-    const playerElement = playerRef.current;
+    const playerElement = videoRef.current;
 
-    if (!playerElement || !isLoaded) {
+    if (!isLoaded || !playerElement) {
       return;
     }
 
-    if (activeFilm === film.id) {
+    if (film.previewVideoLink) {
       playerElement.play();
       return;
     }
 
-    playerElement.pause();
-    playerElement.src = film.previewVideoLink;
-  }, [activeFilm, film.id, film.previewVideoLink, isLoaded]);
+    playerElement.load();
+  }, [film.previewVideoLink, isLoaded]);
 
   return (
-    <video
-      style={{ borderRadius: '5px' }}
-      width="280"
-      height="175"
-      poster={film.previewImage}
-      ref={playerRef}
-      src={film.previewVideoLink}
-      muted
-    />
+    <video poster={film.previewImage} width="327" height="218" ref={videoRef} muted>
+      <source src={film.previewVideoLink} />
+    </video>
   );
 }

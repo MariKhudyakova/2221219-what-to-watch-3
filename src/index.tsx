@@ -1,14 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app.tsx';
 import { Provider } from 'react-redux';
+import App from './components/app/app.tsx';
 import { store } from './redux/store.ts';
-import {
-  checkAuthAction,
-  fetchFilmsAction,
-  fetchPromoFilmAction,
-} from './redux/api-actions.ts';
+import { checkAuthAction, fetchFilmsAction, fetchPromoFilmAction } from './redux/api-actions.ts';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchFilmsAction());

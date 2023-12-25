@@ -1,21 +1,19 @@
-import { MORE_LIKE_FILMS_COUNT } from '../../const.ts';
 import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { AppRoute, MORE_LIKE_FILMS_COUNT } from '../../const.ts';
 import Tabs from '../../components/tabs/tabs.tsx';
 import MoviesList from '../../components/films-list/films-list.tsx';
 import Logo from '../../components/logo/logo.tsx';
 import Footer from '../../components/footer/footer.tsx';
 import UserBlock from '../../components/user-block/user-block.tsx';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks.ts';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
-import MyListButton from '../../components/my-list-button/my-list-button.tsx';
+import MyListButton from '../../components/buttons/my-list-buttons/my-list-button.tsx';
 import { getAuthorized } from '../../redux/user-slice/selectors.ts';
-import {
-  getFilmCard,
-  getMoreLikeThis,
-} from '../../redux/films-slice/selectors.ts';
+import { getFilmCard, getMoreLikeThis } from '../../redux/films-slice/selectors.ts';
 
-export default function MoviePage() {
+function MoviePage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
@@ -33,8 +31,13 @@ export default function MoviePage() {
     return null;
   }
 
+  const TITLE = `WTW. ${filmCard.name}`;
+
   return (
     <>
+      <Helmet>
+        <title>{ TITLE }</title>
+      </Helmet>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -58,11 +61,7 @@ export default function MoviePage() {
               </p>
 
               <div className="film-card__buttons">
-                <Link
-                  to={`/player/${filmCard.id}`}
-                  className="btn btn--play film-card__button"
-                  type="button"
-                >
+                <Link to={`/player/${filmCard.id}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -71,9 +70,7 @@ export default function MoviePage() {
                 {authorized && (
                   <>
                     <MyListButton filmCard={filmCard} />
-                    <Link to={'review'} className="btn film-card__button">
-                      Add review
-                    </Link>
+                    <Link to={AppRoute.AddReview} className="btn film-card__button">Add review</Link>
                   </>
                 )}
               </div>
@@ -84,14 +81,8 @@ export default function MoviePage() {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img
-                src={filmCard.posterImage}
-                alt={filmCard.name}
-                width="218"
-                height="327"
-              />
+              <img src={filmCard.posterImage} alt={filmCard.name} width="218" height="327" />
             </div>
-
             <Tabs filmCard={filmCard} />
           </div>
         </div>
@@ -101,10 +92,7 @@ export default function MoviePage() {
         {moreLikeThis.length !== 0 && (
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <MoviesList
-              films={moreLikeThis}
-              filmsCount={MORE_LIKE_FILMS_COUNT}
-            />
+            <MoviesList films={moreLikeThis} filmsCount={MORE_LIKE_FILMS_COUNT}/>
           </section>
         )}
 
@@ -113,3 +101,5 @@ export default function MoviePage() {
     </>
   );
 }
+
+export default MoviePage;

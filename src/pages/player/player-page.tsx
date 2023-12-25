@@ -1,15 +1,16 @@
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { getFilmCard } from '../../redux/films-slice/selectors.ts';
+import { Helmet } from 'react-helmet-async';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks.ts';
+import { getFilmCard } from '../../redux/films-slice/selectors.ts';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
-import PauseButton from '../../components/pause-button/pause-button.tsx';
-import PlayButton from '../../components/play-button/play-button.tsx';
+import PlayButton from '../../components/buttons/play-button.tsx';
+import PauseButton from '../../components/buttons/pause-button.tsx';
 import ExitLink from '../../components/exit-link/exit-link.tsx';
 import ProgressBar from '../../components/progress-bar/progress-bar.tsx';
 import FullScreenButton from '../../components/full-screen-button/full-screen-button.tsx';
 
-export default function PlayerPage() {
+function PlayerPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const film = useAppSelector(getFilmCard);
@@ -86,8 +87,14 @@ export default function PlayerPage() {
     return null;
   }
 
+  const TITLE = `WTW. Watch the movie ${film?.name}`;
+
   return (
     <div className="player">
+      <Helmet>
+        <title>{ TITLE }</title>
+      </Helmet>
+
       <video
         ref={playerRef}
         src={film.videoLink}
@@ -103,11 +110,7 @@ export default function PlayerPage() {
         />
 
         <div className="player__controls-row">
-          {isPlaying ? (
-            <PauseButton onClick={handlePlayPauseClick} />
-          ) : (
-            <PlayButton onClick={handlePlayPauseClick} />
-          )}
+          {isPlaying ? (<PauseButton onClick={handlePlayPauseClick} />) : (<PlayButton onClick={handlePlayPauseClick} />)}
           <div className="player__name">{film.name}</div>
           <FullScreenButton onClick={handleFullScreenClick} />
         </div>
@@ -115,3 +118,5 @@ export default function PlayerPage() {
     </div>
   );
 }
+
+export default PlayerPage;

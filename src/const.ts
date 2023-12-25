@@ -1,14 +1,16 @@
-import { Genre } from './types.ts';
+import { Genre } from './types/index.ts';
 
-export enum AppRoute {
-  Main = '/',
-  SignIn = '/login',
-  MyList = '/mylist',
-  Film = '/films/:id',
-  AddReview = '/films/:id/review',
-  Player = '/player/:id',
-  NotFound = '*',
-}
+export const SHOW_FILMS_COUNT = 8;
+export const MORE_LIKE_FILMS_COUNT = 4;
+export const ALL_GENRES: Genre = 'All genres';
+export const MAX_GENRES_COUNT = 9;
+export const SHOW_INTRO_DELAY = 1000;
+export const HOUR_MINUTES_COUNT = 60;
+export const TWO_HOUR_MINUTES_COUNT = 3600;
+export const CommentLength = {
+  MIN: 50,
+  MAX: 400,
+};
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -20,14 +22,6 @@ export enum TabType {
   Overview = 'Overview',
   Details = 'Details',
   Reviews = 'Reviews',
-}
-
-export enum Grade {
-  Bad = 'Bad',
-  Normal = 'Normal',
-  Good = 'Good',
-  VeryGood = 'Very good',
-  Awesome = 'Awesome',
 }
 
 export enum FilmStatus {
@@ -53,12 +47,12 @@ export const NameSpace = {
   User: 'User',
 };
 
-export const SHOW_FILMS_COUNT = 8;
-export const MORE_LIKE_FILMS_COUNT = 4;
-export const ALL_GENRES: Genre = 'All genres';
-export const MAX_GENRES_COUNT = 9;
-export const SHOW_INTRO_DELAY = 1000;
-export const CommentLength = {
-  MIN: 50,
-  MAX: 400,
-};
+export enum AppRoute {
+  Main = '/',
+  SignIn = '/login',
+  MyList = '/mylist',
+  Film = '/films/:id',
+  AddReview = '/films/:id/review',
+  Player = '/player/:id',
+  NotFound = '*',
+}

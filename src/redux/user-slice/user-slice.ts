@@ -1,7 +1,7 @@
-import { AuthorizationStatus } from '../../const.ts';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions.ts';
-import { ImageUrl } from '../../types.ts';
+import { ImageUrl } from '../../types/index.ts';
+import { AuthorizationStatus } from '../../const.ts';
 
 type userSliceProps = {
   authorizationStatus: AuthorizationStatus;
@@ -19,14 +19,14 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.fulfilled, (state, action) => {
+      .addCase(checkAuthAction.fulfilled, (state, action: PayloadAction<ImageUrl>) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.userImage = action.payload;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
-      .addCase(loginAction.fulfilled, (state, action) => {
+      .addCase(loginAction.fulfilled, (state, action: PayloadAction<ImageUrl>) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.userImage = action.payload;
       })
@@ -38,3 +38,5 @@ export const userSlice = createSlice({
       });
   },
 });
+
+export const { reducer: userReducer } = userSlice;

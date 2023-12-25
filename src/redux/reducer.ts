@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { combineReducers } from '@reduxjs/toolkit';
 import { userSlice } from './user-slice/user-slice.ts';
 import { filmsSlice } from './films-slice/films-slice.ts';

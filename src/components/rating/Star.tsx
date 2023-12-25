@@ -16,9 +16,7 @@ export default function Star({ value, onChange }: StarProps) {
         value={value}
         onChange={onChange}
       />
-      <label className="rating__label" htmlFor={`star-${value}`}>
-        Rating {value}
-      </label>
+      <label className="rating__label" htmlFor={`star-${value}`}>Rating {value}</label>
     </>
   );
 }

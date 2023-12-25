@@ -1,7 +1,7 @@
-import MovieCard from './film-card.tsx';
 import { useState } from 'react';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
-import { FilmType } from '../../types.ts';
+import MovieCard from './film-card.tsx';
+import { FilmType } from '../../types/film-types.ts';
 import { SHOW_INTRO_DELAY } from '../../const.ts';
 
 type MoviesListProps = {
@@ -26,13 +26,7 @@ export default function MoviesList({ films, filmsCount }: MoviesListProps) {
   return (
     <div className="catalog__films-list">
       {films.slice(0, filmsCount || films.length).map((film) => (
-        <MovieCard
-          film={film}
-          onMouseOver={handleFilmFocus}
-          onMouseOut={handleFilmOut}
-          activeFilm={activeFilm}
-          key={film.id}
-        />
+        <MovieCard film={film} onMouseOver={handleFilmFocus} onMouseOut={handleFilmOut} activeFilm={activeFilm} key={film.id} />
       ))}
     </div>
   );

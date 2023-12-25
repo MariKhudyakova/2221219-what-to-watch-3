@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
-import { getTimeLeft } from '../../utils.ts';
+import { getTimeLeft } from '../../utils/get-time.ts';
 
 type PlayButtonProps = {
   duration: number;
@@ -16,12 +16,7 @@ function ProgressBar({ duration, currentTime }: PlayButtonProps) {
           value={currentTime}
           max={duration}
         />
-        <div
-          className="player__toggler"
-          style={{
-            left: `${(currentTime / duration) * 100}%`,
-          }}
-        >
+        <div className="player__toggler" style={{left: `${(currentTime / duration) * 100}%`}}>
           Toggler
         </div>
       </div>

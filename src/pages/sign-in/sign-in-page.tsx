@@ -1,17 +1,14 @@
+import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Logo from '../../components/logo/logo.tsx';
 import Footer from '../../components/footer/footer.tsx';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks.ts';
+import { useAppDispatch } from '../../hooks/app-hooks.ts';
 import { loginAction } from '../../redux/api-actions.ts';
-import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const.ts';
+import { UserFormValues } from '../../types/index.ts';
 
-export type UserFormValues = {
-  email: string;
-  password: string;
-};
-
-export default function SignInPage() {
+function SignInPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<UserFormValues>({
@@ -43,8 +40,13 @@ export default function SignInPage() {
     navigate(AppRoute.Main);
   };
 
+  const TITLE = 'WTW. Sign In';
+
   return (
     <div className="user-page">
+      <Helmet>
+        <title>{ TITLE }</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo />
 
@@ -64,12 +66,7 @@ export default function SignInPage() {
                 onChange={handleFieldChange}
                 required
               />
-              <label
-                className="sign-in__label visually-hidden"
-                htmlFor="user-email"
-              >
-                Email address
-              </label>
+              <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input
@@ -81,24 +78,11 @@ export default function SignInPage() {
                 onChange={handleFieldChange}
                 required
               />
-              <label
-                className="sign-in__label visually-hidden"
-                htmlFor="user-password"
-              >
-                Password
-              </label>
+              <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
           <div className="sign-in__submit">
-            <button
-              className="sign-in__btn"
-              type="submit"
-              onSubmit={handleSubmit}
-              onClick={handleSubmit}
-              disabled={!isValid}
-            >
-              Sign in
-            </button>
+            <button className="sign-in__btn" type="submit" onSubmit={handleSubmit} onClick={handleSubmit} disabled={!isValid}>Sign in</button>
           </div>
         </form>
       </div>
@@ -107,3 +91,5 @@ export default function SignInPage() {
     </div>
   );
 }
+
+export default SignInPage;

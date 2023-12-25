@@ -1,13 +1,14 @@
 import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import Logo from '../../components/logo/logo.tsx';
 import UserBlock from '../../components/user-block/user-block.tsx';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks.ts';
 import { fetchFilmDataAction } from '../../redux/api-actions.ts';
-import { useEffect } from 'react';
 import { getFilmCard } from '../../redux/films-slice/selectors.ts';
 
-export default function AddReviewPage() {
+function AddReviewPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const filmCard = useAppSelector(getFilmCard);
@@ -22,8 +23,13 @@ export default function AddReviewPage() {
     return null;
   }
 
+  const TITLE = 'WTW. Add review';
+
   return (
     <section className="film-card film-card--full">
+      <Helmet>
+        <title>{ TITLE }</title>
+      </Helmet>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={filmCard.backgroundImage} alt={filmCard.name} />
@@ -46,7 +52,6 @@ export default function AddReviewPage() {
               </li>
             </ul>
           </nav>
-
           <UserBlock />
         </header>
 
@@ -63,3 +68,5 @@ export default function AddReviewPage() {
     </section>
   );
 }
+
+export default AddReviewPage;

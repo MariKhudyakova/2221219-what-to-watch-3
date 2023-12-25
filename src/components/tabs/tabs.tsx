@@ -4,7 +4,7 @@ import Details from './details.tsx';
 import Reviews from './reviews.tsx';
 import TabLink from './tab-link.tsx';
 import { SyntheticEvent, useState } from 'react';
-import { FilmCardType } from '../../types.ts';
+import { FilmCardType } from '../../types/film-types.ts';
 
 type TabsProps = {
   filmCard: FilmCardType;

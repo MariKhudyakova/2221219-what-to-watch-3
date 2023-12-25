@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { setFilmStatus } from '../../redux/api-actions.ts';
-import { FilmStatus } from '../../const.ts';
-import { getMyList } from '../../redux/films-slice/selectors.ts';
+import { useAppSelector, useAppDispatch } from '../../../hooks/app-hooks.ts';
+import { setFilmStatus } from '../../../redux/api-actions.ts';
+import { FilmStatus } from '../../../const.ts';
+import { getMyList } from '../../../redux/films-slice/selectors.ts';
 
 type AddToMyListButtonProps = {
   filmId: string;

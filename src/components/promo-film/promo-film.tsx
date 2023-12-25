@@ -2,10 +2,10 @@
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo.tsx';
 import UserBlock from '../user-block/user-block.tsx';
-import { PromoFilmType } from '../../types.ts';
-import MyListButton from '../my-list-button/my-list-button.tsx';
+import { PromoFilmType } from '../../types/promo-film-type.ts';
+import MyListButton from '../buttons/my-list-buttons/my-list-button.tsx';
 import React from 'react';
-import { useAppSelector } from '../../redux/hooks.ts';
+import { useAppSelector } from '../../hooks/app-hooks.ts';
 import { getAuthorized } from '../../redux/user-slice/selectors.ts';
 
 type PromoFilmProps = {

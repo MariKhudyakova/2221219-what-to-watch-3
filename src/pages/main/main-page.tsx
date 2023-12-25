@@ -1,25 +1,31 @@
+import { Helmet } from 'react-helmet-async';
 import MoviesList from '../../components/films-list/films-list.tsx';
 import GenresList from '../../components/genre/genres-list.tsx';
-import { useAppSelector } from '../../redux/hooks.ts';
-import ShowMoreButton from '../../components/films-list/show-more-button.tsx';
+import { useAppSelector } from '../../hooks/app-hooks.ts';
+import ShowMoreButton from '../../components/buttons/show-more-button.tsx';
 import PromoFilm from '../../components/promo-film/promo-film.tsx';
 import Footer from '../../components/footer/footer.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
 import { useState } from 'react';
 import { SHOW_FILMS_COUNT } from '../../const.ts';
-import { useFilmsByGenre } from '../../hooks.ts';
+import { useFilmsByGenre } from '../../hooks/films-by-genre-hook.ts';
 import { getPromoFilm } from '../../redux/films-slice/selectors.ts';
 
-export default function MainPage() {
+function MainPage() {
   const [filmsCount, setFilmsCount] = useState(SHOW_FILMS_COUNT);
   const films = useFilmsByGenre();
   const promoFilm = useAppSelector(getPromoFilm);
+  const TITLE = 'WTW';
 
   const handleShowMoreButtonClick = () =>
     setFilmsCount((prevState) => prevState + SHOW_FILMS_COUNT);
 
   return (
     <>
+      <Helmet>
+        <title>{ TITLE }</title>
+      </Helmet>
+
       {promoFilm && <PromoFilm promoFilm={promoFilm} />}
       <div className="page-content">
         <section className="catalog">
@@ -43,3 +49,5 @@ export default function MainPage() {
     </>
   );
 }
+
+export default MainPage;

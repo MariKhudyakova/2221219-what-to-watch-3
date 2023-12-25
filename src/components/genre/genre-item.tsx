@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { Genre } from '../../types.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks.ts';
+import { Genre } from '../../types/index.ts';
 import { getActiveGenre } from '../../redux/films-slice/selectors.ts';
 import { setActiveGenre } from '../../redux/films-slice/films-slice.ts';
 

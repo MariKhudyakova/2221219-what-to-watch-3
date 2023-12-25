@@ -1,23 +1,9 @@
-export type Genre = string;
-export type ImageUrl = string;
-
 export type FilmType = {
   id: string;
   name: string;
   previewImage: string;
   previewVideoLink: string;
   genre: string;
-};
-
-export type PromoFilmType = {
-  id: string;
-  name: string;
-  posterImage: string;
-  backgroundImage: string;
-  videoLink: string;
-  genre: string;
-  released: number;
-  isFavorite: boolean;
 };
 
 export type FilmCardType = {
@@ -39,18 +25,3 @@ export type FilmCardType = {
 };
 
 export type FavouriteFilmType = FilmType & FilmCardType;
-
-export type CommentType = {
-  id: string;
-  date: string;
-  user: string;
-  comment: string;
-  rating: number;
-};
-
-export type AuthInfo = {
-  name: string;
-  avatarUrl: string;
-  email: string;
-  token: string;
-};
